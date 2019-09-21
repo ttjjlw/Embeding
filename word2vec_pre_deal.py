@@ -13,12 +13,12 @@ def sent2id(seg_words, dictionary):
 
 #读进数据，dictionary data_num
 with open (r'300dim_03\dictionary03.pkl','rb') as f:
-    dictionary=pickle.load(f) #长度240000-60
+    dictionary=pickle.load(f) #长度240000-60 word2id <PAD>:0 
     print(len(dictionary))
-    dictionary_reverse=pickle.load(f) #注意此字典key没有0和1
+    dictionary_reverse=pickle.load(f) # id2word
 with open(r'300dim_03\word_all_num03.pkl','rb') as f:
     data_num=pickle.load(f)
-print(len(data_num))     #111997581  #111997581      #03版  112972260
+print(len(data_num))     #111997581  #111997581     
 print(data_num[-1])
 data_index=0
 def build_batch(data,batch_size,num_skip,skip_window):
