@@ -1,0 +1,8 @@
+__pycache__/
+# test data
+data/text.txt
+
+# glove
+data/glove.txt
+data/glove.png
+
