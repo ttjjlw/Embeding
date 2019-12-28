@@ -32,7 +32,7 @@ def build_batch(data,batch_size,num_skip,skip_window):
     deque=collections.deque(maxlen=span) #创建双向队列，如deque=[1,2,3],deque.append(4),则deque=[2,3,4]
     #初始化deque,把data前三个元素，放入deque中
     for _ in range(span):
-        deque.append(data_index)
+        deque.append(data[data_index])#修改于2019-12-28
         data_index+=1
     for i in range(batch_size//num_skip):
         for j in range(span):
@@ -56,6 +56,7 @@ learning_rate_base=1.2    #d当用Adam做优化器，用学习率指数变化就
 vocabulary_size=len(dictionary)+1           #防止总共不同的词数少于设置总词长，导致后面的embedding个数超过字典的总长，导致报keyerror
 batch_size=512
 embedding_size=300
+#Mikolov等人在论文中说：对于小数据集，负采样的个数在5-20个；对于大数据集，负采样的个数在2-5个。
 neg_samples=75
 num_skip=2
 skip_window=1
