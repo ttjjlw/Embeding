@@ -43,6 +43,7 @@ class CorpusPreprocess(object):
         for line in self._read_data():
             self.vocab.update(line)
         self.vocab = dict((w.strip(), f) for w,f in self.vocab.items() if (f >= self.min_freq and w.strip()))
+        self.vocab = dict(sorted(self.vocab.items(), key=lambda x: x[1], reverse=True))
         self.vocab = {w:(i, f) for i, (w, f) in enumerate(self.vocab.items())}
         self.idex2word = {i:w for w, (i,f) in self.vocab.items()}
         self.logger.info("build vocab complete!")
