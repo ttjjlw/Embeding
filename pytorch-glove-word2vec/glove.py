@@ -12,8 +12,8 @@ from tools import CorpusPreprocess, VectorEvaluation
 # params
 x_max = 100
 alpha = 0.75
-epoches = 10
-min_count = 5
+epoches = 1
+min_count = 0
 batch_size = 512
 windows_size = 5
 vector_size = 300
@@ -102,7 +102,7 @@ def save_word_vector(file_name, corpus_preprocessor, glove):
             s_vector = glove.s_weight.weight.data.numpy()
             vector = c_vector + s_vector
         try:
-            with open('data/vector.pkl', 'wb') as p:
+            with open('output/vector.pkl', 'wb') as p:
                 pickle.dump(vector, p)
             print('vector的shape', vector.shape)
         except:
@@ -171,7 +171,7 @@ if __name__ == "__main__":
     # file_path
     if not os.path.exists('output/'): os.makedirs('output/')
     save_vector_file_name = "output/glove.txt"
-    save_picture_file_name = "data/glove.png"
+    save_picture_file_name = "output/glove.png"
     corpus_file_name = "data/zhihu.txt"
     train_model(epoches, corpus_file_name)
     vec_eval = VectorEvaluation(save_vector_file_name)
