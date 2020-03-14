@@ -1,5 +1,5 @@
 # Embeding
-分为三个部分1、pytorch实现glove和word2vec(skipgram和cw) 2、tensorflow 实现word2vec(skipgram) 3.gensim训练词向量并保存
+分为三个部分1、pytorch实现glove和word2vec(skipgram和cw) 2、tensorflow 实现word2vec(skipgram) 3.gensim训练词向量并保存</r>
 https://blog.csdn.net/qq_40859560/article/details/104848972
 
 
