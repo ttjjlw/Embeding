@@ -15,6 +15,6 @@ windows系统：win+r 输入cmd，回车
 pip install jieba -i https://pypi.douban.com/simple/    
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple gensim  
 nvcc -V 查看cuda版本   
-conda install pytorch torchvision cudatoolkit=9.0
+conda install pytorch torchvision cudatoolkit=9.0（9.0为cuda的版本号）  
 torch.cuda.is_available() 
 
