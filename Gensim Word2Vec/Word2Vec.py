@@ -93,7 +93,7 @@ def get_dict_and_embedding(model_dir,embed_dir,vocabulary_dir,embed_dim):
 
 if __name__ == '__main__':
     train_corpus='data/train_corpus/corpus.txt'
-    if not os.path.exist('output/'):os.mkdirs('output/')
+    if not os.path.exists('output/'):os.mkdirs('output/')
     model_dir="output/Vector.txt"
     embed_dir='output/embed.pkl'
     vocabulary_dir='output/vocabulary.pkl'
