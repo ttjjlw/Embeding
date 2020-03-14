@@ -7,4 +7,4 @@
 输入为：数字编码的文本，word2id和id2word
 输出为：词向量  
 
-# [详细说明，请阅读博客](https://blog.csdn.net/qq_40859560/article/details/104848972)
+## [详细说明，请阅读博客](https://blog.csdn.net/qq_40859560/article/details/104848972)
