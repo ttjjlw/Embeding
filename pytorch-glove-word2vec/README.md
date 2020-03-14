@@ -2,17 +2,15 @@
 Word Embadding 作为当下 nlp 领域最流行的技巧。为了深入了解其原理，使用当下流行的深度学习框架实现斯坦福的 `Glove` 和 google 的 `word2vec`。
 
 * `tools.py` 提供文本的预处理，降维可视化等功能。
-* `huffman.py` 将词表转化为哈夫曼树。
-* `word2vec` skip-gram and cbow
+
 
 
 
 
 #### running code
 ```python
+python generate_train_corpus.py
 python glove.py
-
-python word2vec.py
 ```
 
 
