@@ -22,12 +22,12 @@ logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=loggin
 #         corpus.extend(line.decode('utf-8').strip().split(' '))
 # dic = collections.Counter(corpus).most_common()
 def train(train_corpus,model_dir):
-    sentences = word2vec.Text8Corpus(train_corpus)
+    sentences = word2vec.LineSentence(train_corpus)
 
     # 训练模型，部分参数如下
     # max_vocab_size: 设置词向量构建期间的RAM限制，设置成None则没有限制。
     #trim_rule： 用于设置词汇表的整理规则，指定那些单词要留下，哪些要被删除。可以设置为None（min_count会被使用）。
-    model = word2vec.Word2Vec(sentences, #对于大语料建议使用BrownCorpus,Text8Corpus或lineSentence构建
+    model = word2vec.Word2Vec(sentences, #对于大语料建议使用BrownCorpus,Text8Corpus或LineSentence构建
                               size=100, #size: 词向量的维度，默认值是100
                               alpha=0.025,#alpha： 是初始的学习速率默认值0.025，在训练过程中会线性地递减到min_alpha。
                               hs=0,#hs: 即我们的word2vec两个解法的选择了，如果是0， 则是Negative Sampling，是1的话并且负采样个数negative大于0， 则是Hierarchical Softmax。默认是0即Negative Sampling。
@@ -47,7 +47,7 @@ def train(train_corpus,model_dir):
 
 
     # 保留模型，方便重用
-    model.save(u'word2vec.model')
+    model.save(u'word2vec.model')#该方法保存，可用来继续训练
     #按词频由大到小写入word及其embedding
     model.wv.save_word2vec_format(model_dir, binary=False)
 
