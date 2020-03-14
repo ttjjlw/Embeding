@@ -200,7 +200,7 @@ if __name__ == "__main__":
     save_picture_file_name = "output/glove.png"
     embed_dir='output/glove_{}.pkl'.format(str(vector_size))
     vocabulary_dir='output/vocabulary.pkl'
-    corpus_file_name = "data/zhihu.txt"
+    corpus_file_name = 'data/train_corpus/corpus.txt'
     train_model(epoches, corpus_file_name)
     vec_eval = VectorEvaluation(save_vector_file_name)
     # vec_eval.drawing_and_save_picture(save_picture_file_name)
