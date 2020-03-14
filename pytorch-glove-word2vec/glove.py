@@ -101,12 +101,12 @@ def save_word_vector(file_name, corpus_preprocessor, glove):
             c_vector = glove.c_weight.weight.data.numpy()
             s_vector = glove.s_weight.weight.data.numpy()
             vector = c_vector + s_vector
-        try:
-            with open('output/vector.pkl', 'wb') as p:
-                pickle.dump(vector, p)
-            print('vector的shape', vector.shape)
-        except:
-            print('打印vector的shape有误')
+        # try:
+        #     with open('output/vector.pkl', 'wb') as p:
+        #         pickle.dump(vector, p)
+        #     print('vector的shape', vector.shape)
+        # except:
+        #     print('打印vector的shape有误')
         for i in tqdm(range(len(vector))):
             word = corpus_preprocessor.idex2word[i]
             s_vec = vector[i]
@@ -166,15 +166,44 @@ def train_model(epoches, corpus_file_name):
     save_word_vector(save_vector_file_name, corpus_preprocessor, glove)
     torch.save(glove.state_dict(), glove_model_file)
 
+def get_dict_and_embedding(model_dir,embed_dir,vocabulary_dir,embed_dim):
+    word2id={'<pad>':0}
+    index=1
+    embeddings=[]
+    embeddings.append([0]*embed_dim)
+    with open (model_dir,'r', encoding='utf-8') as f:
+        lines=f.readlines()
+        for line in lines:
+            if len(line.strip().split())<3:
+                continue
+            word=line.strip().split()[0]
+            data=line.strip().split()[1:]
+            word2id[word]=index
+            index+=1
+            try:
+                assert len(data)==embed_dim
+            except:
+                print(len(data),embed_dim)
+            embeddings.append(data)
+    embeddings=np.array(embeddings)
+    print('glove embeddings的shape为：({}*{})=={}'.format(index,embed_dim,embeddings.shape))
+    with open(embed_dir,'wb') as p:
+        pickle.dump(embeddings,p)
+    with open(vocabulary_dir,'wb') as p1:
+        pickle.dump(word2id,p1)
+    print('完成！')
 
 if __name__ == "__main__":
     # file_path
     if not os.path.exists('output/'): os.makedirs('output/')
     save_vector_file_name = "output/glove.txt"
     save_picture_file_name = "output/glove.png"
+    embed_dir='output/glove_{}.pkl'.format(str(vector_size))
+    vocabulary_dir='output/vocabulary.pkl'
     corpus_file_name = "data/zhihu.txt"
     train_model(epoches, corpus_file_name)
     vec_eval = VectorEvaluation(save_vector_file_name)
     # vec_eval.drawing_and_save_picture(save_picture_file_name)
     vec_eval.get_similar_words("加拿大")
     vec_eval.get_similar_words("男人")
+    get_dict_and_embedding(model_dir=save_vector_file_name,embed_dir=embed_dir,vocabulary_dir=vocabulary_dir,embed_dim=vector_size)
